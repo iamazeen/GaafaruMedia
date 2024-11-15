@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="dv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaafaru Media - ޚަބަރު</title>
+    <style>
+        @font-face {
+            font-family: 'Faruma';
+            src: url('faruma.otf') format('opentype');
+        }
+        
+        :root {
+            --primary-color: #1a237e;
+            --secondary-color: #0d47a1; 
+            --accent-color: #42a5f5;
+            --text-color: #333;
+            --light-text: #fff;
+            --background-color: #f5f5f5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Faruma', sans-serif;
+        }
+
+        body {
+            direction: rtl;
+            line-height: 1.6;
+            background: var(--background-color);
+        }
+
+        /* Header Styles */
+        .header {
+            background: var(--primary-color);
+            color: var(--light-text);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo img {
+            height: 60px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo img:hover {
+            transform: scale(1.1);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--light-text);
+            text-decoration: none;
+            transition: color 0.3s, transform 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--light-text);
+        }
+
+        /* News Section */
+        .news-section {
+            max-width: 1200px;
+            margin: 100px auto 0;
+            padding: 2rem;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .news-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .news-excerpt {
+            font-size: 1rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .news-date {
+            font-size: 0.9rem;
+            color: #777;
+            margin-bottom: 0.5rem;
+        }
+
+        .read-more {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+
+        .read-more:hover {
+            background-color: var(--accent-color);
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: var(--primary-color);
+            color: var(--light-text);
+            padding: 3rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .footer-logo img {
+            height: 60px;
+            width: auto;
+            margin-bottom: 1rem;
+        }
+
+        .footer-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        .footer-info p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            justify-content: flex-start;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .footer-info p:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-info i {
+            color: var(--light-text);
+            font-size: 1.3rem;
+            margin-right: 1.5rem;
+            transition: transform 0.3s;
+            width: 20px;
+            text-align: center;
+            margin-left: 20px;
+        }
+
+        .footer-info p:hover i {
+            transform: scale(1.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--primary-color);
+                padding: 1rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 0.5rem 0;
+            }
+
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .footer-info {
+                text-align: center;
+                align-items: center;
+            }
+
+            .footer-info p {
+                justify-content: center;
+            }
+
+            .news-section {
+                padding: 1rem;
+            }
+
+            .news-card {
+                margin-bottom: 1.5rem;
+            }
+
+            .news-title {
+                font-size: 1.3rem;
+            }
+
+            .news-excerpt {
+                font-size: 0.9rem;
+            }
+
+            .read-more {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .news-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .news-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">
+                <img src="Asset 3.png" alt="Gaafaru Media Logo">
+            </div>
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="index.html">މައި ޞަފްޙާ</a>
+                <a href="index.html#services">ޚިދުމަތްތައް</a>
+                <a href="index.html#gallery">ގެލަރީ</a>
+                <a href="index.html#about">އަޅުގަނޑުމެންނާ ބެހޭ</a>
+                <a href="contact.html">ގުޅުއްވުމަށް</a>
+                <a href="#news">ޚަބަރު</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="news-section" id="news">
+        <h2 class="section-title">އެންމެ ފަހުގެ ޚަބަރުތައް</h2>
+        <div class="news-grid">
+            <div class="news-card">
+                <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80" alt="New School Building" class="news-image">
+                <div class="news-content">
+                    <h3 class="news-title">ގާފަރުގައި އައު ސްކޫލް އިމާރާތެއް ހުޅުވައިފި</h3>
+                    <p class="news-excerpt">ގާފަރުގެ ތަޢުލީމީ ދާއިރާއަށް އިތުރު ކުރިއެރުމެއް ލިބިއްޖެ. މިއަދު ހެނދުނު ގާފަރުގައި އައު ސްކޫލް އިމާރާތެއް ރަސްމީކޮށް ހުޅުވައިފިއެވެ.</p>
+                    <p class="news-date">15 ޖޫން 2023</p>
+                    <a href="#" class="read-more">އިތުރަށް ކިޔާ</a>
+                </div>
+            </div>
+            <div class="news-card">
+                <img src="https://images.unsplash.com/photo-1618477462146-050d2767eac4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Beach Cleanup" class="news-image">
+                <div class="news-content">
+                    <h3 class="news-title">ގާފަރުގެ ޒުވާނުން ތިމާވެށި ސާފުކުރުމުގެ ޙަރަކާތެއް ހިންގައިފި</h3>
+                    <p class="news-excerpt">ގާފަރުގެ ޒުވާނުން އިސްނަގައިގެން ރަށުގެ ގޮނޑުދޮށާއި މަގުތައް ސާފުކުރުމުގެ ޚާއްޞަ ޙަރަކާތެއް ބާއްވައިފިއެވެ.</p>
+                    <p class="news-date">10 ޖޫން 2023</p>
+                    <a href="#" class="read-more">އިތުރަށް ކިޔާ</a>
+                </div>
+            </div>
+            <div class="news-card">
+                <img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Football Tournament" class="news-image">
+                <div class="news-content">
+                    <h3 class="news-title">ގާފަރުގައި ފުޓްބޯޅަ މުބާރާތެއް ފެށިއްޖެ</h3>
+                    <p class="news-excerpt">ގާފަރުގެ ޒުވާނުންގެ މެދުގައި ކުޅިވަރުގެ ރޫޙު އާލާކުރުމަށް ރޭ ފުޓްބޯޅަ މުބާރާތެއް ފަށައިފިއެވެ. މި މުބާރާތުގައި ރަށުގެ 8 ޓީމެއް ވާދަކުރާނެއެވެ.</p>
+                    <p class="news-date">5 ޖޫން 2023</p>
+                    <a href="#" class="read-more">އިތުރަށް ކިޔާ</a>
+                </div>
+            </div>
+            <div class="news-card">
+                <img src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80" alt="Health Camp" class="news-image">
+                <div class="news-content">
+                    <h3 class="news-title">ގާފަރުގައި ހިލޭ ސާމްޕަލް ޞިއްޙީ ކޭމްޕެއް ބޭއްވިއްޖެ</h3>
+                    <p class="news-excerpt">ގާފަރު ކައުންސިލާއި ޞިއްޙީ މަރުކަޒު ގުޅިގެން ރަށުގެ ރައްޔިތުންނަށް އަމާޒުކޮށްގެން ހިލޭ ސާމްޕަލް ޞިއްޙީ ކޭމްޕެއް ބާއްވައިފިއެވެ.</p>
+                    <p class="news-date">1 ޖޫން 2023</p>
+                    <a href="#" class="read-more">އިތުރަށް ކިޔާ</a>
+                </div>
+            </div>
+            <div class="news-card">
+                <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Fishing Competition" class="news-image">
+                <div class="news-content">
+                    <h3 class="news-title">ގާފަރުގައި މަސްވެރިކަމުގެ މުބާރާތެއް ބޭއްވިއްޖެ</h3>
+                    <p class="news-excerpt">ގާފަރުގެ މަސްވެރިންގެ މެދުގައި ވާދަވެރިކަން އިތުރުކުރުމަށް މިދިޔަ ހަފްތާގައި މަސްވެރިކަމުގެ މުބާރާތެއް ބޭއްވިއްޖެއެވެ.</p>
+                    <p class="news-date">28 މެއި 2023</p>
+                    <a href="#" class="read-more">އިތުރަށް ކިޔާ</a>
+                </div>
+            </div>
+            <div class="news-card">
+                <img src="https://images.unsplash.com/photo-1607453998774-d533f65dac99?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Cultural Festival" class="news-image">
+                <div class="news-content">
+                    <h3 class="news-title">ގާފަރުގައި ސަގާފީ މުނާސަބަތެއް ފާހަގަކޮށްފި</h3>
+                    <p class="news-excerpt">ގާފަރުގެ ސަގާފަތާއި އާދަކާދަތައް ދިރުވައި އާލާކުރުމުގެ މަޤްޞަދުގައި ރޭ ގާފަރުގައި ސަގާފީ މުނާސަބަތެއް ފާހަގަކޮށްފިއެވެ.</p>
+                    <p class="news-date">25 މެއި 2023</p>
+                    <a href="#" class="read-more">އިތުރަށް ކިޔާ</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="Asset 3.png" alt="Gaafaru Media Logo">
+            </div>
+            <div class="footer-info">
+                <p><i class="fas fa-phone"></i> ފޯނު: &nbsp;&nbsp; <span style="font-family: 'Inter', sans-serif;">+960 7777777</span></p>
+                <p><i class="fas fa-envelope"></i> އީމެއިލް: &nbsp;&nbsp; <span style="font-family: 'Inter', sans-serif;">info@gaafarumedia.mv</span></p>
+                <p><i class="fas fa-map-marker-alt"></i> އެޑްރެސް: &nbsp;&nbsp; <span style="font-family: 'Inter', sans-serif;">Gaafaru, K. Atoll, Maldives</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navLinks = document.getElementById('nav-links');
+
+            mobileMenu.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
